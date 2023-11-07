@@ -5,6 +5,6 @@ def create_app():
     
     @app.route('/test')
     def test():
-        return render_template("test1.html")
+        return render_template("base.html")
     
     return app

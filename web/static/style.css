@@ -1,0 +1,62 @@
+body {
+    background-image: url('images/main_background.jpg'); /* 背景画像のパスを指定 */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.login-box {
+    width: 400px;
+    height: 300px;
+    background-color: rgba(0, 0, 0, 0.7); /* 半透明の黒の背景 */
+    border-radius: 10px; /* 角を丸くする */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.login-box h1 {
+    color: white; /* タイトルの文字色を白に設定 */
+    font-size: 24px; /* タイトルのフォントサイズを設定 */
+    margin-bottom: 20px; /* タイトルとフォームの間に余白を追加 */
+}
+
+.login-box input[type="text"],
+.login-box input[type="password"] {
+    width: 80%;
+    padding: 10px;
+    margin: 5px;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.2); /* 半透明の白 */
+    border-radius: 5px;
+    color: white; /* 文字の基本色を白に設定 */
+}
+
+.login-box input[type="submit"] {
+    width: 80%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    background-color: #3498db; /* ログインボタンの背景色 */
+    border-radius: 5px;
+    color: white; /* 文字の基本色を白に設定 */
+    cursor: pointer;
+}
+
+.login-box input[type="submit"]:hover {
+    background-color: #2980b9; /* ボタンをホバーしたときの背景色 */
+}
