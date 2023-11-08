@@ -60,3 +60,10 @@ body {
 .login-box input[type="submit"]:hover {
     background-color: #2980b9; /* ボタンをホバーしたときの背景色 */
 }
+
+.login-box .error-message {
+    color: red; /* エラーメッセージの文字色を赤に設定 */
+    font-size: 14px; /* エラーメッセージのフォントサイズを設定 */
+    text-align: center; /* メッセージを中央揃えに */
+    margin-top: 10px; /* エラーメッセージとフォームの間に余白を追加 */
+}

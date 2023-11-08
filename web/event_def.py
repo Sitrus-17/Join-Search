@@ -135,12 +135,13 @@ def data_get(login_id,password):
                         })
                     
                 else:
-                    print("詳細リンクにアクセスできませんでした")
+                    print("詳細リンクにアクセスに失敗")
             
         else:
             print("予約受付中の仕事一覧の取得に失敗")
     else:
         print("ログイン失敗")
+        return "失敗"
 
     # セッションをクローズ
     session.close()

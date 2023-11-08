@@ -10,7 +10,12 @@
         <div class="login-container">
             <div class="login-box">
                 <h1>ログイン</h1>
-                <form action="your-login-action.php" method="post">
+                {% if error_message %}
+                <div class="error-message">
+                    {{ error_message }}
+                </div>
+                {% endif %}
+                <form method="post">
                     <input type="text" name="username" placeholder="ユーザー名" required>
                     <input type="password" name="password" placeholder="パスワード" required>
                     <input type="submit" value="ログイン">

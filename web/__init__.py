@@ -1,10 +1,11 @@
-from flask import (Flask, render_template)
+from flask import Flask
+
+from . import home
 
 def create_app():
     app = Flask(__name__)
     
-    @app.route('/test')
-    def test():
-        return render_template("base.html")
+    from . import home
+    app.register_blueprint(home.bp)
     
     return app
