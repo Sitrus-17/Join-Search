@@ -6,7 +6,7 @@ body {
     margin: 0;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     height: 100vh;
 }
 
@@ -66,4 +66,113 @@ body {
     font-size: 14px; /* エラーメッセージのフォントサイズを設定 */
     text-align: center; /* メッセージを中央揃えに */
     margin-top: 10px; /* エラーメッセージとフォームの間に余白を追加 */
+}
+
+.calendar-container {
+    width: 100%;
+    max-width: 1000px; /* カレンダーの最大幅を制限 */
+    margin: auto; /* 中央揃え */
+    font-size: 1.2em; /* 文字サイズを大きくする */
+    background-color: rgba(255, 255, 255, 0.2); /* 半透明の白 */
+    border-radius: 10px;
+}
+
+table {
+    width: 100%;
+    table-layout: fixed; /* 各列の幅を均等にする */
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+th, tr {
+    background-color: #f2f2f2;
+}
+
+td {
+    height: 80px; /* 各日付のセルの高さ */
+    vertical-align: top;
+    padding: 5px;
+}
+
+.today {
+    background-color: yellow; /* 今日の日付をハイライト */
+}
+
+.calendar-nav {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.calendar-nav form {
+    display: inline;
+}
+
+.calendar-nav button {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.calendar-nav button:hover {
+    color: #555;
+}
+
+td div a {
+    align-self: flex-end;
+}
+
+.table-container {
+    max-height: 500px; /* これは例です。必要に応じて調整してください。 */
+    overflow-y: auto; /* 垂直方向のスクロールを有効化 */
+    margin: 20px auto;
+    width: 80%;
+}
+
+table {
+    width: 100%;
+    margin: 0;
+    border-collapse: collapse;
+}
+
+.search-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+.form-group {
+    margin: 0 10px;
+    margin-bottom: 15px;
+}
+
+.search-form label {
+    margin-right: 10px;
+}
+
+.search-form select {
+    width: 200px; /* セレクトボックスの幅を適宜調整 */
+    height: auto; /* 高さは自動で調整 */
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.search-form input[type="submit"] {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    background-color: #3498db;
+    color: white;
+    cursor: pointer;
+}
+
+.search-form input[type="submit"]:hover {
+    background-color: #2980b9;
 }

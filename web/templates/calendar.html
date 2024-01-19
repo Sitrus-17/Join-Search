@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<body>
+    <div class="calendar-container">
+        <div class="calendar-nav">
+            <form method="post" style="display: inline;">
+                <input type="hidden" name="year" value="{{ year }}" >
+                <input type="hidden" name="month" value="{{ month }}">
+                <button type="submit" name="prev">&lt;</button>
+            </form>
+            <span>{{ year }}年 {{ month }}月</span>
+            <form method="post" style="display: inline;">
+                <input type="hidden" name="year" value="{{ year }}">
+                <input type="hidden" name="month" value="{{ month }}">
+                <button type="submit" name="next">&gt;</button>
+            </form>
+        </div>
+        <div class="calendar-main">
+            <table border="0" cellpadding="0" cellspacing="0" class="month">
+                <tr><th class="month" colspan="7">November 2023</th></tr>
+                <tr><th class="sun">Sun</th><th class="mon">Mon</th><th class="tue">Tue</th><th class="wed">Wed</th><th class="thu">Thu</th><th class="fri">Fri</th><th class="sat">Sat</th></tr>
+                {% for day_count in data %}
+                {% if loop.first or (loop.index0 + data[0]) % 7 == 1 %}
+                <tr>
+                {% endif %}
+                {% if loop.first or loop.last %}
+                {% for _ in range(day_count) %}
+                    <td ></td>
+                {% endfor %}
+                {% elif day_count == 0 %}
+                    <td>{{ loop.index0 }}</td>
+                {% else %}
+                    <td>
+                        {{ loop.index0 }}
+                        <a href="{{ url_for('calender.show_event', year=year, month=month, industry=industry, reservation=reservation, day=loop.index0) }}">{{ day_count }}</a>
+                    </td>
+                {% endif %}
+
+                {% if (loop.index0 + data[0]) % 7 == 0 or loop.last %}
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </table>
+        </div>
+
+        <form method="post" class="search-form">
+
+            <input type="hidden" name="year" value="{{ year }}" >
+            <input type="hidden" name="month" value="{{ month }}">
+
+            <div class="form-group">
+                <label>お仕事の業種:</label>
+                <div>
+                    <input type="checkbox" id="venue-arrangement" name="industry[]" value="会場整理">
+                    <label for="venue-arrangement">会場整理</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="venue-preparation" name="industry[]" value="会場準備">
+                    <label for="venue-preparation">会場準備</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="stage-out" name="industry[]" value="ステージ搬出">
+                    <label for="stage-out">ステージ搬出</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="stage-in" name="industry[]" value="ステージ搬入">
+                    <label for="stage-in">ステージ搬入</label>
+                </div>
+            </div>
+        
+            <div class="form-group">
+                <label>予約状態:</label>
+                <div>
+                    <input type="checkbox" id="waiting-for-cancellation" name="reservation[]" value="キャンセル待ち">
+                    <label for="waiting-for-cancellation">キャンセル待ち</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="pending-cancellation" name="reservation[]" value="キャンセル待ち中">
+                    <label for="pending-cancellation">キャンセル待ち中</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="available" name="reservation[]" value="予約可能">
+                    <label for="available">予約可能</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="reserved" name="reservation[]" value="予約中">
+                    <label for="reserved">予約中</label>
+                </div>
+            </div>
+        
+            <input type="submit" name="action" value="検索">
+        </form>
+        
+        
+        
+    </div>
+</body>
+{% endblock %}

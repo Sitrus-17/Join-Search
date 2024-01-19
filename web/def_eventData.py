@@ -1,7 +1,9 @@
 import requests
 from bs4 import BeautifulSoup
+from datetime import datetime
+import web.def_DB
 
-def data_get(login_id,password):
+def digitize_data(login_id,password):
 
     # ユーザーエージェントの設定
     headers = {
@@ -81,7 +83,8 @@ def data_get(login_id,password):
                         if tag_name == "div":
                             style_attribute = element.get("style")
                             if style_attribute and 'background:#CCCCCC;color:#000000;' in style_attribute: # スタイルが特定の値を持つ場合のみ処理
-                                date = element.text[:8]
+                                temp = element.text[:8]
+                                date = f"20{temp[0:2]}-{temp[3:5]}-{temp[6:8]}"
                                 
                         #tableの場合（時間、業務内容、予約状態の情報）
                         if tag_name == "table":
@@ -123,22 +126,24 @@ def data_get(login_id,password):
                             else:
                                 reserve_stats = "例外な状態です。"
                                 work_matter, work_time = ["不明","不明"]
+            
                     
-                        #業務の詳細情報をリストに格納
-                        event_info_list.append({
-                            "アーティスト": artist,
-                            "会場": place,
-                            "日付": date,
-                            "時間": work_time,
-                            "業務内容": work_matter,
-                            "予約状態": reserve_stats
-                        })
+                            #業務の詳細情報をリストに格納
+                            event_info_list.append({
+                                "アーティスト": artist,
+                                "会場": place,
+                                "日付": date,
+                                "時間": work_time,
+                                "業務内容": work_matter,
+                                "予約状態": reserve_stats
+                            })
                     
                 else:
                     print("詳細リンクにアクセスに失敗")
-            
+                    return "失敗"
         else:
             print("予約受付中の仕事一覧の取得に失敗")
+            return "失敗"
     else:
         print("ログイン失敗")
         return "失敗"
@@ -146,15 +151,16 @@ def data_get(login_id,password):
     # セッションをクローズ
     session.close()
 
-    return event_info_list
+    web.def_DB.save_data(event_info_list)
+    return "成功"
 
 if __name__ == "__main__":
-    data = data_get("519976471","8wzmqy")
-    for char in data:
-        print(f'''==========
-アーティスト名:{char["アーティスト"]}
-会場:{char["会場"]}
-日時:{char["日付"]}|{char["時間"]}
-業務内容:{char["業務内容"]}
-予約状態:{char["予約状態"]}         
-''')
+    web.def_DB.init_db()
+    digitize_data("519976471","8wzmqy")
+    data = web.def_DB.get_data()
+    #import def_sortData
+    #print(def_sortData.calendar_sort(data)["24/1"])
+    #for char in data:
+    #   print(f'''日時:{char["日付"]}|{char["時間"]}アーティスト名:{char["アーティスト"]}会場:{char["会場"]}業務内容:{char["業務内容"]}予約状態:{char["予約状態"]}''')
+    print(data)  
+        

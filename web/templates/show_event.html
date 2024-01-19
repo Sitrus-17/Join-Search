@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<body class="show-event">
+<table class="table-container">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>アーティスト</th>
+            <th>会場</th>
+            <th>日付</th>
+            <th>時間</th>
+            <th>業務内容</th>
+            <th>予約状態</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for event in data %}
+            <tr>
+                <td>{{ event[0] }}</td>
+                <td>{{ event[1] }}</td>
+                <td>{{ event[2] }}</td>
+                <td>{{ event[3] }}</td>
+                <td>{{ event[4] }}</td>
+                <td>{{ event[5] }}</td>
+                <td>{{ event[6] }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</body>
+{% endblock %}
